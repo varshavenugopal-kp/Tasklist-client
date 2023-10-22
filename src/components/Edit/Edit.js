@@ -1,4 +1,4 @@
-import { faCircleXmark, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
@@ -38,6 +38,7 @@ function Edit({setEditOpen,taskId}) {
 
     const closeModal = () => {
         setEditOpen(false);
+        window.location.reload();
     };
 
     useEffect(()=>{
@@ -64,6 +65,8 @@ function Edit({setEditOpen,taskId}) {
       console.log("hhhhhhhhhhhhhhhhhhh",updatedData);
     const { data: responseData } = await axios.post('http://localhost:8000/editData',{...updatedData,id:taskId});
     console.log(responseData);
+
+    closeModal()
   } catch (error) {
     // Handle errors
     console.error("Error occurred:", error);
@@ -150,7 +153,7 @@ Select Priority
                         </div>:
                        <div className='relative w-full overflow-x-scroll flex scrollbar gap-2  py-2 px-1'>
                        <label htmlFor="file_upload" className="cursor-pointer">
-                         <FontAwesomeIcon className='fixed text-xl' icon={faCircleXmark} />
+                         <FontAwesomeIcon className='fixed text-sm' icon={faPenToSquare} />
                        </label>
                        <input id="file_upload" type="file" accept="image/*" name="file_upload" className="hidden" onChange={handleFileChange} />
                        <img src={data.image} className='pt-6 h-24  bg-gray-300'/>

@@ -5,6 +5,7 @@ import axios from 'axios'
 import Edit from '../Edit/Edit'
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Single from '../Single/Single'
 
 function Home() {
     const  [addOpen,setAddOpen]=useState(false)
@@ -75,7 +76,7 @@ function Home() {
     }
     const handleSelect=(taskId)=>{
         selectOpen(taskId)
-        
+        settaskId(taskId)
     }
     const handleClick=(taskId)=>{
       console.log("jjjjj");
@@ -131,13 +132,13 @@ function Home() {
           {
             data?.map((tasks) => (
               <div className='h-72 w-56 border border-black'>
-                <img className='h-2/3 w-full ' src={tasks?.image}></img>
+                <img className='h-2/3 w-full ' src={tasks?.image} key={tasks?.id} onClick={()=>handleSelect(tasks?.id)}></img>
                 <p className='p-3 text-lg font-semibold'>{tasks?.heading}</p>
                 {/* <p className='ms-3 line-clamp-2 text-xs'>{tasks?.description}</p> */}
                 {/* <div className='ms-3 mt-2 w-24 h-7 transition duration-300 ease-in-out hover:scale-90 bg-black cursor-pointer'> */}
-               <div className='flex space-x-44 '>
-               <div className=' px-2'><FontAwesomeIcon icon={faPenToSquare} className='text-sm text-left' key={tasks?._id} onClick={()=>handleClick(tasks?.id)}/></div>
-               <div className='mt-2 '><FontAwesomeIcon icon={faTrashCan} className='text-sm text-left'key={tasks?._id} onClick={()=>handledelete(tasks?.id)} /></div>
+               <div className='px-2 flex justify-between'>
+               <div className=''><FontAwesomeIcon icon={faPenToSquare} className='text-sm text-left' key={tasks?.id} onClick={()=>handleClick(tasks?.id)}/></div>
+               <div className=''><FontAwesomeIcon icon={faTrashCan} className='text-sm text-left'key={tasks?.id} onClick={()=>handledelete(tasks?.id)} /></div>
             
                 </div>
                 
@@ -155,26 +156,6 @@ function Home() {
       </div>
 
 
-      
-{/* <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <a href="#">
-        <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
-    </a>
-    <div class="p-5">
-        <a href="#">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-        </a>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-        <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Read more
-             <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-            </svg>
-        </a>
-    </div>
-</div> */}
-
-
 
         {
             addOpen && <Add setAddOpen={setAddOpen}/>
@@ -184,6 +165,11 @@ function Home() {
         {
           editOpen && <Edit setEditOpen={setEditOpen} taskId={taskId}/>
         }
+        </div>
+        <div>
+          {
+            select && <Single selectOpen={selectOpen} taskId={taskId}/>
+          }
         </div>
     </div>
    

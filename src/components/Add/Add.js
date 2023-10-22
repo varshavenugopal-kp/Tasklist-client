@@ -9,6 +9,17 @@ function Add({ setAddOpen }) {
     const [fileUrl, setUrl] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const [pdata, setData] = useState()
+
+
+    const closeModal = () => {
+       
+        setAddOpen(false);
+    };
+
+    const modalClose=()=>{
+        setAddOpen(false);
+        window.location.reload();
+    }
     const handleFileChange = ((e) => {
         const file = e.target.files?.[0]
 
@@ -44,18 +55,19 @@ function Add({ setAddOpen }) {
    
 
     const handleAdd = async (e) => {
-        e.preventDefault()
-        try {
-            const { data } = await axios.post('http://localhost:8000/add', { ...pdata, image: fileUrl })
-        }
-        catch (error) {
-
-        }
+        e.preventDefault();
+    try {
+        const { data } = await axios.post('http://localhost:8000/add', { ...pdata, image: fileUrl });
+        // setData((prevData) => [...prevData, data]);
+        modalClose()
+        
+    } catch (error) {
+        // Handle the error, if required
+        console.error('Error occurred while adding data:', error);
+    }
     }
 
-    const closeModal = () => {
-        setAddOpen(false);
-    };
+   
     return (
         <div>
             <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -80,7 +92,7 @@ function Add({ setAddOpen }) {
                             </div> */}
 
                             <div>
-                                <input type='text' className='shadow appearance-none border rounded w-full py-2 px-3 h-9' name='heading' onChange={addTask} placeholder='Enter Title'></input>
+                                <input type='text' className='shadow appearance-none border rounded w-full py-2 px-3 h-9' name='heading' onChange={addTask} placeholder='Enter Title' required></input>
                             </div>
                         </div>
 
@@ -98,7 +110,7 @@ function Add({ setAddOpen }) {
                             </div> */}
 
                             <div>
-                                <input type='date' className='shadow appearance-none border rounded w-full py-2 px-3 h-9' name='date' onChange={addTask} ></input>
+                                <input type='date' className='shadow appearance-none border rounded w-full py-2 px-3 h-9' name='date' onChange={addTask} required></input>
                             </div>
                         </div>
                         <div className='w-full mt-5'>
@@ -106,7 +118,7 @@ function Add({ setAddOpen }) {
                                 <label className=''>Priority</label>
                             </div> */}
 
-<select name="priority" className="w-full h-10 border-2" onChange={addTask}>
+<select name="priority" className="w-full h-10 border-2" onChange={addTask} required>
     <option value="" disabled selected hidden>
         Select Priority
     </option>
@@ -139,7 +151,7 @@ function Add({ setAddOpen }) {
                                 <span className="text-blue-600 underline">browse</span>
                             </span>
                         </span>
-                        <input type="file" accept="image/*" name="file_upload" className="hidden" onChange={handleFileChange} />
+                        <input type="file" accept="image/*" name="file_upload" className="hidden" onChange={handleFileChange} required/>
                     </label>
                          }
 
