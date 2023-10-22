@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 function Single({selectOpen,taskId}) {
-    console.log(taskId,"eeeeeeeeeeee");
+   
     const [data,setData]=useState()
     const closeModal = () => {
         selectOpen(false);
@@ -16,10 +16,10 @@ function Single({selectOpen,taskId}) {
     const fetchData=(async()=>{
        
         const response = await axios.get(`http://localhost:8000/single/${taskId}`)
-        console.log("ooo",response);
+       
         setData(response.data.data[0])
     })
-    console.log("hehehe",data);
+   
   return (
     <div>
            {data && (

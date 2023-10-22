@@ -15,11 +15,12 @@ function Add({ setAddOpen }) {
        
         setAddOpen(false);
     };
-
-    const modalClose=()=>{
+    
+    function modalClose(){
         setAddOpen(false);
         window.location.reload();
     }
+   
     const handleFileChange = ((e) => {
         const file = e.target.files?.[0]
 
@@ -62,7 +63,7 @@ function Add({ setAddOpen }) {
         modalClose()
         
     } catch (error) {
-        // Handle the error, if required
+       
         console.error('Error occurred while adding data:', error);
     }
     }
@@ -87,9 +88,7 @@ function Add({ setAddOpen }) {
 
                     <form className=''>
                         <div className='w-full mt-5'>
-                            {/* <div>
-                                <label className=''>Heading</label>
-                            </div> */}
+                           
 
                             <div>
                                 <input type='text' className='shadow appearance-none border rounded w-full py-2 px-3 h-9' name='heading' onChange={addTask} placeholder='Enter Title' required></input>
@@ -97,26 +96,20 @@ function Add({ setAddOpen }) {
                         </div>
 
                         <div className='w-full mt-5'>
-                            {/* <div>
-                                <label className=''>Description</label>
-                            </div> */}
+                           
                             <div className='w-full'>
                                 <textarea name='description' className='shadow appearance-none border rounded w-full py-2 px-3 h-24' onChange={addTask} placeholder='Add Description' required></textarea>
                             </div>
                         </div>
                         <div className='w-full mt-5'>
-                            {/* <div>
-                                <label className=''>Date</label>
-                            </div> */}
+                            
 
                             <div>
                                 <input type='date' className='shadow appearance-none border rounded w-full py-2 px-3 h-9' name='date' onChange={addTask} required></input>
                             </div>
                         </div>
                         <div className='w-full mt-5'>
-                            {/* <div>
-                                <label className=''>Priority</label>
-                            </div> */}
+                           
 
 <select name="priority" className="w-full h-10 border-2" onChange={addTask} required>
     <option value="" disabled selected hidden>
@@ -147,7 +140,7 @@ function Add({ setAddOpen }) {
                                     d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                             </svg>
                             <span className="font-medium text-gray-600">
-                                Drop files to Attach, or
+                               
                                 <span className="text-blue-600 underline">browse</span>
                             </span>
                         </span>

@@ -38,7 +38,7 @@ function Edit({setEditOpen,taskId}) {
 
     const closeModal = () => {
         setEditOpen(false);
-        window.location.reload();
+       
     };
 
     useEffect(()=>{
@@ -46,14 +46,14 @@ function Edit({setEditOpen,taskId}) {
     },[])
     const fetchData=(async()=>{
         const response = await axios.get(`http://localhost:8000/single/${taskId}`)
-        console.log("ooo",response);
+        
         setData(response.data.data[0])
     })
 
     const handleEdit =async(e) => {
         e.preventDefault();
   try {
-    console.log("Handling edit...", data); // Log the data before sending
+    console.log("Handling edit...", data); 
     const formattedDate = new Date(data.date).toISOString().slice(0, 19).replace('T', ' ');
     let updatedData
     if(fileUrl){
@@ -62,13 +62,15 @@ function Edit({setEditOpen,taskId}) {
        updatedData = { ...data, date: formattedDate };
     }
      
-      console.log("hhhhhhhhhhhhhhhhhhh",updatedData);
+     
     const { data: responseData } = await axios.post('http://localhost:8000/editData',{...updatedData,id:taskId});
+    
+    
     console.log(responseData);
-
     closeModal()
+    
   } catch (error) {
-    // Handle errors
+    
     console.error("Error occurred:", error);
   }
     }
@@ -76,7 +78,7 @@ function Edit({setEditOpen,taskId}) {
     const addDetails = ((e) => {
         setData({ ...data, [e.target.name]: e.target.value })
       })
-    console.log("hehehe",data);
+   
   return (
     <div>
         <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -96,9 +98,7 @@ function Edit({setEditOpen,taskId}) {
 
     <form className='' onSubmit={handleEdit}>
         <div className='w-full mt-5'>
-            {/* <div>
-                <label className=''>Heading</label>
-            </div> */}
+          
 
             <div>
                 <input type='text' className='shadow appearance-none border rounded w-full py-2 px-3 h-9'  name='heading' value={data.heading} onChange={addDetails} ></input>
@@ -106,26 +106,19 @@ function Edit({setEditOpen,taskId}) {
         </div>
 
         <div className='w-full mt-5'>
-            {/* <div>
-                <label className=''>Description</label>
-            </div> */}
+        
             <div className='w-full'>
                 <textarea name='description' className='shadow appearance-none border rounded w-full py-2 px-3 h-24' value={data.description} onChange={addDetails}></textarea>
             </div>
         </div>
         <div className='w-full mt-5'>
-            {/* <div>
-                <label className=''>Date</label>
-            </div> */}
-
+           
             <div>
                 <input type='date' className='shadow appearance-none border rounded w-full py-2 px-3 h-9' name='date' value={data.date ? new Date(data.date).toISOString().split('T')[0] : ''} onChange={addDetails}></input>
             </div>
         </div>
         <div className='w-full mt-5'>
-            {/* <div>
-                <label className=''>Priority</label>
-            </div> */}
+           
 
 <select name="priority" className="w-full h-10 border-2" value={data.priority} onChange={addDetails}>
 <option value="" disabled selected hidden>
@@ -136,12 +129,7 @@ Select Priority
 <option value="High">High</option>
 </select>
         </div>
-        {/* <div className='relative w-full overflow-x-scroll flex scrollbar gap-2  py-2 px-1'>
-                            <FontAwesomeIcon className='fixed text-xl' icon={faCircleXmark} />
-                            <input type="file" accept="image/*" name="file_upload" className="hidden" onChange={handleFileChange} />
-                           <img src={data.image} className='pt-6 h-24  bg-gray-300'/>
-                            
-                        </div> */}
+        
 
 
                    {

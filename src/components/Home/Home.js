@@ -33,24 +33,10 @@ function Home() {
         }
     } catch (error) {
         console.error('Error occurred while fetching data:', error);
-        // Handle errors here
+
     }
     };
   
-    // const prioFetch = async () => {
-    //   try {
-    //     let url = 'http://localhost:8000/';
-    //     if (prio && prio !== 'All') {
-    //       url += `priorData/${prio}`;
-    //     }
-    //     const response = await axios.get(url);
-    //     if (response.data && response.data.data) {
-    //       setData(response.data.data);
-    //     }
-    //   } catch (error) {
-    //     console.error('Error occurred while fetching data:', error);
-    //   }
-    // };
 
 
   
@@ -63,7 +49,7 @@ function Home() {
         }
     } catch (error) {
         console.error('Error occurred while fetching data:', error);
-        // Handle errors here
+       
     }
     };
   
@@ -96,7 +82,7 @@ function Home() {
       setData(updatedData);
     } catch (error) {
       console.error('Error occurred while deleting data:', error);
-      // Handle errors here
+      
     }
    }
    console.log(taskId);
@@ -134,8 +120,7 @@ function Home() {
               <div className='h-72 w-56 border border-black'>
                 <img className='h-2/3 w-full ' src={tasks?.image} key={tasks?.id} onClick={()=>handleSelect(tasks?.id)}></img>
                 <p className='p-3 text-lg font-semibold'>{tasks?.heading}</p>
-                {/* <p className='ms-3 line-clamp-2 text-xs'>{tasks?.description}</p> */}
-                {/* <div className='ms-3 mt-2 w-24 h-7 transition duration-300 ease-in-out hover:scale-90 bg-black cursor-pointer'> */}
+               
                <div className='px-2 flex justify-between'>
                <div className=''><FontAwesomeIcon icon={faPenToSquare} className='text-sm text-left' key={tasks?.id} onClick={()=>handleClick(tasks?.id)}/></div>
                <div className=''><FontAwesomeIcon icon={faTrashCan} className='text-sm text-left'key={tasks?.id} onClick={()=>handledelete(tasks?.id)} /></div>
@@ -143,13 +128,7 @@ function Home() {
                 </div>
                 
 
-                  {/* <p className='text-white text-xs text-center py-1 pb-10' key={tasks?._id} onClick={()=>handleClick(tasks?.id)} >READ MORE</p> */}
-                {/* </div> */}
-
-                {/* <div className='ms-3 mt-2 w-24 h-7 transition duration-300 ease-in-out hover:scale-90 bg-black cursor-pointer'> */}
-                  {/* <p className='text-white text-xs text-center py-1 pb-10' key={tasks?._id} onClick={()=>handledelete(tasks?.id)} >delete</p> */}
-                
-                {/* </div> */}
+              
               </div>
            ))
           }
