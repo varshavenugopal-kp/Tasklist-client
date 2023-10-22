@@ -49,6 +49,27 @@ function Edit({setEditOpen,taskId}) {
         setData(response.data.data[0])
     })
 
+    const handleEdit =async(e) => {
+        e.preventDefault();
+  try {
+    console.log("Handling edit...", data); // Log the data before sending
+    const formattedDate = new Date(data.date).toISOString().slice(0, 19).replace('T', ' ');
+    let updatedData
+    if(fileUrl){
+        updatedData = { ...data, date: formattedDate,image:fileUrl };
+    }else{
+       updatedData = { ...data, date: formattedDate };
+    }
+     
+      console.log("hhhhhhhhhhhhhhhhhhh",updatedData);
+    const { data: responseData } = await axios.post('http://localhost:8000/editData',{...updatedData,id:taskId});
+    console.log(responseData);
+  } catch (error) {
+    // Handle errors
+    console.error("Error occurred:", error);
+  }
+    }
+
     const addDetails = ((e) => {
         setData({ ...data, [e.target.name]: e.target.value })
       })
@@ -70,7 +91,7 @@ function Edit({setEditOpen,taskId}) {
     </div>
 
 
-    <form className=''>
+    <form className='' onSubmit={handleEdit}>
         <div className='w-full mt-5'>
             {/* <div>
                 <label className=''>Heading</label>
@@ -118,13 +139,26 @@ Select Priority
                            <img src={data.image} className='pt-6 h-24  bg-gray-300'/>
                             
                         </div> */}
-                        <div className='relative w-full overflow-x-scroll flex scrollbar gap-2  py-2 px-1'>
-  <label htmlFor="file_upload" className="cursor-pointer">
-    <FontAwesomeIcon className='fixed text-xl' icon={faCircleXmark} />
-  </label>
-  <input id="file_upload" type="file" accept="image/*" name="file_upload" className="hidden" onChange={handleFileChange} />
-  <img src={data.image} className='pt-6 h-24  bg-gray-300'/>
-</div>
+
+
+                   {
+                    fileUrl?
+                    <div className='relative w-full overflow-x-scroll flex scrollbar gap-2  py-2 px-1'>
+                            <FontAwesomeIcon onClick={()=>setUrl(null)} className='fixed text-xl' icon={faCircleXmark} />
+                           <img src={fileUrl} className='pt-6 h-24'/>
+                            
+                        </div>:
+                       <div className='relative w-full overflow-x-scroll flex scrollbar gap-2  py-2 px-1'>
+                       <label htmlFor="file_upload" className="cursor-pointer">
+                         <FontAwesomeIcon className='fixed text-xl' icon={faCircleXmark} />
+                       </label>
+                       <input id="file_upload" type="file" accept="image/*" name="file_upload" className="hidden" onChange={handleFileChange} />
+                       <img src={data.image} className='pt-6 h-24  bg-gray-300'/>
+                     </div>
+                   }
+     <button className='bg-sky-950 text-white py-2 px-6 text-sm rounded-md' >Edit</button>
+                                
+                       
         </form> 
                 </div>
             </div>

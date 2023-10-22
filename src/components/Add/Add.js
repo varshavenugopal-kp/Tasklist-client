@@ -11,7 +11,7 @@ function Add({ setAddOpen }) {
     const [pdata, setData] = useState()
     const handleFileChange = ((e) => {
         const file = e.target.files?.[0]
-        
+
         if (file) {
             generateUrl(file)
         } else {
@@ -154,6 +154,7 @@ function Add({ setAddOpen }) {
                                     </div>
                                     :
                                     <button className='bg-sky-950 text-white py-2 px-6 text-sm rounded-md' onClick={handleAdd} >Add</button>
+                                
                                 }
                             
                             </div> 
